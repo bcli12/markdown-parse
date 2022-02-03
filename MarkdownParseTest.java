@@ -28,4 +28,19 @@ public class MarkdownParseTest {
         }
     }
 
+    @Test
+    public void testNoFile() throws IOException {
+        ArrayList<String> expected = new ArrayList<>();
+        //expected.add("https://something.com");
+        //expected.add("some-page.html");
+        expected.add("");
+        List<String> list = List.of("");
+        for (String string : list) {
+            Path fileName = Path.of(string);
+	        String contents = Files.readString(fileName);
+            ArrayList<String> links = MarkdownParse.getLinks(contents);
+            assertEquals(expected, links);
+        }
+    }
+
 }
